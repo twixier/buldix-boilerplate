@@ -38,8 +38,6 @@ var objTasks = () => {
 
 // Error handling
 var errorManager = class {
-	constructor() {}
-
 	emit(err) {
 		// Emit warning
     $.util.beep();
