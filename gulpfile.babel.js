@@ -2,9 +2,14 @@
 
 // Import required modules
 import gulp from 'gulp';
-import util from 'gulp-util';
 import gulpLoadPlugins from 'gulp-load-plugins';
 import browserSync from 'browser-sync';
+
+import browserify from 'browserify';
+import source from 'vinyl-source-stream';
+import buffer from 'vinyl-buffer';
+import uglifyify from 'uglifyify';
+import babelify from 'babelify';
 
 // Set basic constants
 const $ = gulpLoadPlugins(); // Module loading
@@ -58,21 +63,11 @@ var errorManager = class {
 
     // Show visual warning in terminal  
     log({
-      'title': mod.notify.title,
+      'title': cfg.environment.name,
       'message': error,
       'statusColor': 'error',
       'status': 'error'
     });
-
-    // Emit warning through notifier
-    // Temporarily fix until we have a better solution than to run a stream
-    gulp.src('')
-        .pipe($.notify({
-                    "title": mod.notify.title,
-                    "subtitle": mod.notify.subtitle,
-                    "message": error
-                    })
-        );
 
     // Emit end to gulp, so we make sure gulp is not hanging around to wait
     this.emit("end");
@@ -85,15 +80,15 @@ gulp.task('compile:sass', () => {
 	var ErrorManager = new errorManager();
 
 	return gulp.src(objPath.sass.source)
-         .pipe(mod.sourcemaps === true ? $.sourcemaps.init() : util.noop())
-         .pipe($.sass(Object.keys(mod.sass.options).length > 0 ? mod.sass.options : {}))
+         .pipe(mod.sourcemaps === true ? $.sourcemaps.init() : $.util.noop())
+         .pipe($.sass(mod.sass.options))
          .on('error', ErrorManager.emit)
          .pipe($.autoprefixer(mod.autoprefixer))
-         .pipe($.cssnano())
-         .pipe(mod.sourcemaps === true ? $.sourcemaps.write() : util.noop())
+         .pipe($.cssnano(mod.cssnano.options))
+         .pipe(mod.sourcemaps === true ? $.sourcemaps.write() : $.util.noop())
          .pipe(gulp.dest(objPath.sass.target))
          .on('error', ErrorManager.emit)
-         .pipe(mod.csssplit.enabled ? csssplit(mod.csssplit.opt) : util.noop())
+         .pipe(mod.csssplit.enabled ? csssplit(mod.csssplit.opt) : $.util.noop())
          .pipe($.notify({
                           "title": cfg.environment.name,
                           "subtitle": cfg.environment.project,
@@ -104,13 +99,62 @@ gulp.task('compile:sass', () => {
 });
 
 gulp.task('compile:script', () => {
+	// Error manager
+	var ErrorManager = new errorManager;
 
+ // Compile develoment javascript
+  var devel = browserify({
+    entries: objPath.script.source,
+    debug: true
+  });
+
+  devel.transform(babelify)
+			 .bundle()
+       .on('error', ErrorManager.emit)
+       .pipe(source('bundle.dev.js'))
+       .pipe(buffer())
+       .pipe($.rename('app.min.dev.js'))
+       .pipe(mod.sourcemaps === true ? $.sourcemaps.init() : $.util.noop())
+       .pipe(gulp.dest(objPath.script.target))
+       .pipe(mod.sourcemaps === true ? $.sourcemaps.write() : $.util.noop())
+       .pipe($.notify({
+            "title": cfg.environment.name,
+            "subtitle": cfg.environment.project,
+            "message": "Completed: javascript compiling (dev)"
+          })
+       )
+       .pipe(browserSync.reload({ stream: true }));
+
+  // Compile production javascript
+  var prod = browserify({
+    entries: objPath.script.source,
+    debug: false
+  });
+  
+	prod.transform(babelify)
+			.transform(uglifyify)
+			.bundle()
+      .on('error', ErrorManager.emit)
+      .pipe(source('bundle.prod.js'))
+      .pipe(buffer())
+      .pipe($.rename('app.min.js'))
+      .pipe(gulp.dest(objPath.script.target))
+			.pipe($.notify({
+            "title": cfg.environment.name,
+            "subtitle": cfg.environment.project,
+            "message": "Completed: javascript compiling (prod)"
+          })
+       )
+});
+
+gulp.task('browsersync:start', () => {
+	browserSync(mod.browsersync.options);
 });
 
 /*
 * Watch: Default task for our Gulp
 **/
-gulp.task('default', () => {
+gulp.task('default', ['browsersync:start'], () => {
 	// Create tasklist
 	var objTasklist = new objTasks;
 	
@@ -119,7 +163,6 @@ gulp.task('default', () => {
 		var currentTask = objTasklist[key];
 		// If our taskname exists in current tasklist, we're gonna add a watcher with task and bs.reload
 		if(typeof gulp.tasks[currentTask] !== 'undefined') {
-			console.log("Path", objPath[key]['watch']);
 			gulp.watch(objPath[key]['watch'], [currentTask,bs]);
 		} else {
 			// Since we didn't find our task in tasklist, we're still gonna add a default watcher but only with a bs.reload binding
