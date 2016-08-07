@@ -75,7 +75,10 @@ var errorManager = class {
 	}
 }
 
-// Tasks
+/**
+* SASS
+* Task for compiling SASSS into CSS
+**/
 gulp.task('compile:sass', () => {
 	var ErrorManager = new errorManager();
 
@@ -98,6 +101,10 @@ gulp.task('compile:sass', () => {
          .pipe(browserSync.reload({ stream: true }))
 });
 
+/**
+* Javascript
+* Task for compiling for dev/prod es5/es6 javascript
+**/
 gulp.task('compile:script', () => {
 	// Error manager
 	var ErrorManager = new errorManager;
@@ -147,12 +154,25 @@ gulp.task('compile:script', () => {
        )
 });
 
+/**
+* Images
+* Opitimize images found in our local image (library) store
+**/
+gulp.task('compile:images', () => {
+});
+
+/**
+* Browsersync
+* Connect to browser and perform an update when changes are being maded to source files
+**/
 gulp.task('browsersync:start', () => {
 	browserSync(mod.browsersync.options);
 });
 
 /*
-* Watch: Default task for our Gulp
+* Default
+* Bind task and connect it to required tasks.
+* If a path-settings don't have a watch option, bind an browsersync.reload event instead.
 **/
 gulp.task('default', ['browsersync:start'], () => {
 	// Create tasklist
