@@ -1,0 +1,73 @@
+/*------------------------------------*\
+  #Settings
+\*------------------------------------*/
+
+/**
+ *
+ * All settings, colors etc. can be set here and then called from our scss.
+ *
+ * HOW TO IMPLEMENT:
+ * You have to use a namespace to provide readability.
+ * $[module]-[option][-[modifier|]]
+ *
+ * Remember to describe each section to provide clearity of what each setting does.
+ *
+ */
+
+
+
+
+
+/*------------------------------------*\
+  #Global-settings
+\*------------------------------------*/
+
+// Global border radius
+$global-radius: 4px;
+
+// Global gutter spacing
+$global-gutter: 24px;
+
+
+
+
+
+/*------------------------------------*\
+  #Borders
+\*------------------------------------*/
+
+//  Primary border size
+$border-primary: 2px solid;
+
+
+
+
+
+/*------------------------------------*\
+  #Fonts
+\*------------------------------------*/
+
+// Font families
+$font-primary: ;
+
+// Font weights
+$font-weight-normal: 400;
+$font-weight-bold: 700;
+
+//Font sizes
+$font-size-xs: 12px;
+$font-size-sm: 14px;
+$font-size-md: 16px;
+$font-size-lg: 18px;
+$font-size-xl: 24px;
+
+
+
+
+
+/*------------------------------------*\
+  #Transitions
+\*------------------------------------*/
+
+// Background transition
+$bg-transition: background-color .25s ease;

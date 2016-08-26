@@ -1,0 +1,11 @@
+/*------------------------------------*\
+  #Data-attributes
+\*------------------------------------*/
+
+// Retrive value from a data attribute.
+// @function: data(value);
+// @attr - attribute name you want the mixin to search for without "data-" in front.
+
+@function data($attr) {
+  @return '[data-' + $attr + ']';
+}
