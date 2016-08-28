@@ -1,46 +1,101 @@
+/*------------------------------------*\
+  #Vendor
+\*------------------------------------*/
+
 /**
-* Vendor
 * Import thirdparty/vendor specific styles here. (ex: normalize)
 **/
+
 @import "vendor/normalize";
 
-/**
-* Utilities
-* Contains your basic setup for your style library. Such as settings, functions, font imports and so on. 
-**/
-@import "utilities/settings",
-				"utilities/functions",
-				"utilities/mixins",
-				"utilities/fonts";
+
+
+
+
+/*------------------------------------*\
+  #Utilities
+\*------------------------------------*/
 
 /**
-* Atoms
+* Configuration and helpers
+**/
+
+@import "utilities/settings",
+        "utilities/functions",
+        "utilities/animations",
+        "utilities/mixins",
+        "utilities/placeholders";
+
+
+
+
+
+/*------------------------------------*\
+  #Base
+\*------------------------------------*/
+
+/**
+* Base stuff
+**/
+
+@import "base/body",
+        "base/typography";
+
+
+
+
+
+/*------------------------------------*\
+  #Layout
+\*------------------------------------*/
+
+/**
+* Layout-related sections
+**/
+
+@import "layout/header",
+        "layout/footer";
+
+
+
+
+
+/*------------------------------------*\
+  #Components
+\*------------------------------------*/
+
+/**
 * The site building blocks.
 **/
-@import "atoms/link",
-				"atoms/buttons",
-				"atoms/paragraph";
+
+@import "components/link",
+        "components/buttons",
+        "components/headings",
+        "components/paragraph";
+
+
+
+
+
+/*------------------------------------*\
+  #Pages
+\*------------------------------------*/
 
 /**
-* Molecules
-* Collection of atoms formed to a molecule
+* Page-specific styles
 **/
+
 @import "";
+
+
+
+
+/*------------------------------------*\
+  #Shame
+\*------------------------------------*/
 
 /**
-* Organisms
-* @TODO: Add desc
+* This file contains all hacks, fixes and generel workarounds
 **/
-@import "";
 
-/**
-* Pages
-* @TODO: ADD desc
-**/
-@import "";
-
-
-
-
-
-
+@import "utilities/shame";
