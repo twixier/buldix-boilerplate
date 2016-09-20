@@ -17,7 +17,10 @@ import buildix from 'buildix-util';
 
 // Set basic constants
 const $ = gulpLoadPlugins(); // Module loading
-const bs = browserSync.reload; // Browsersync - reload
+const reload = (done) => { // Browsersync - reload
+  browserSync.reload;
+  done();
+} 
 
 // Configuration shortcuts
 const cfg = require('./buildix.json'); // Basic configuration
@@ -29,16 +32,12 @@ const mod = cfg.module;
 * Task for compiling SASSS into CSS
 **/
 gulp.task('compile:sass', () => {
-
-	return gulp.src(objPath.sass.source)
-         .pipe(mod.sourcemaps === true ? $.sourcemaps.init() : $.util.noop())
+  return gulp.src(objPath.sass.source)
          .pipe($.sass(mod.sass.options))
          .on('error', $.sass.logError)
          .pipe($.autoprefixer(mod.autoprefixer))
          .pipe($.cssnano(mod.cssnano.options))
-         .pipe(mod.sourcemaps === true ? $.sourcemaps.write() : $.util.noop())
          .pipe(gulp.dest(objPath.sass.target))
-         .pipe(mod.csssplit.enabled ? csssplit(mod.csssplit.opt) : $.util.noop())
          .pipe($.notify({
                           "title": cfg.environment.name,
                           "subtitle": cfg.environment.project,
@@ -58,7 +57,7 @@ gulp.task('compile:script', () => {
     debug: true
   });
 
-  devel.transform(babelify)
+  return devel.transform(babelify)
 			 .bundle()
        .pipe(source('bundle.dev.js'))
        .pipe(buffer())
@@ -72,14 +71,16 @@ gulp.task('compile:script', () => {
             "message": "Completed: javascript compiling (dev)"
           })
        );
+});
 
+gulp.task('compile:script:prod', () => {
   // Compile production javascript
   var prod = browserify({
     entries: objPath.script.source,
     debug: false
   });
   
-	prod.transform(babelify)
+	return prod.transform(babelify)
 			.transform(uglifyify)
 			.bundle()
       .pipe(source('bundle.prod.js'))
@@ -129,9 +130,8 @@ gulp.task('default', gulp.series('browsersync:start', (done) => {
       var key = currentTask.replace('compile:','');
       
       // Create watcher and bind required events
-      gulp.watch(objPath[key]['watch'], gulp.series(currentTask, bs))
+      gulp.watch(objPath[key]['watch'], gulp.series(currentTask, reload))
       .on('change', (path) => {
-        console.log("Update: ", path);
       })
     }
   }

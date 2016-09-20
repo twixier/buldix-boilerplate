@@ -2,7 +2,7 @@
 	
 	var w = window,
 			d = document;
-
+  
 /**
 * Default app container
 **/
@@ -33,7 +33,7 @@ var App = {
 	**/
 	dataattr: function (str) {
 		return str.replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase();
-	},
+	},             
 	/**
 	* @function
 	* Mediator implementation of a broadcast system
@@ -44,7 +44,7 @@ var App = {
 		}
 	
 		this._topics[topic].push(cb);
-	
+	  
 		return true;
 	},
 	unsubscribe: function (topic, cb) {
