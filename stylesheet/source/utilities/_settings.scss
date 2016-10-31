@@ -1,26 +1,18 @@
 /*------------------------------------*\
   #Settings
-\*------------------------------------*/
-
-/**
- *
- * All settings, colors etc. can be set here and then called from our scss.
- *
- * HOW TO IMPLEMENT:
- * You have to use a namespace to provide readability.
- * $[module]-[option][-[modifier|]]
- *
- * Remember to describe each section to provide clearity of what each setting does.
- *
- */
-
-
-
-
+  All settings, colors etc. can be set here and then called from our scss.
+ 
+  HOW TO IMPLEMENT:
+  You have to use a namespace to provide readability.
+  $[module]-[option][-[modifier|]]
+ 
+  Remember to describe each section to provide clearity of what each setting does.
+\*------------------------------------*/ 
 
 /*------------------------------------*\
-  #Global-settings
+  # Global-settings
 \*------------------------------------*/
+$global-font-size: 100% !default;
 
 // Global border radius
 $global-radius: 4px;
@@ -28,46 +20,45 @@ $global-radius: 4px;
 // Global gutter spacing
 $global-gutter: 24px;
 
-
-
-
-
 /*------------------------------------*\
-  #Borders
+  # Fonts
 \*------------------------------------*/
-
-//  Primary border size
-$border-primary: 2px solid;
-
-
-
-
-
-/*------------------------------------*\
-  #Fonts
-\*------------------------------------*/
-
-// Font families
-$font-primary: ;
+$font-primary: 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif;
+$font-antialiased: true;
 
 // Font weights
-$font-weight-normal: 400;
-$font-weight-bold: 700;
+$font-weight: (
+	light: 200,
+	normal: 400,
+	bold: 600,
+	extrabold: 800
+);
 
 //Font sizes
-$font-size-xs: 12px;
-$font-size-sm: 14px;
-$font-size-md: 16px;
-$font-size-lg: 18px;
-$font-size-xl: 24px;
-
-
-
-
+$font-size: (
+	xs: 12px,
+	sm: 14px,
+	md: 16px,
+	lg: 18px,
+	xl: 24px
+);
 
 /*------------------------------------*\
-  #Transitions
+  # Breakpoints
 \*------------------------------------*/
+$breakpoints: (
+	small: 0,
+	medium: 640px,
+	large: 1024px,
+	xlarge: 1200px,
+	xxlarge: 1440px
+);
 
-// Background transition
-$bg-transition: background-color .25s ease;
+/*------------------------------------*\
+  # Color
+	// TODO: Create a base color palette (maybe in dwarf colors)
+\*------------------------------------*/
+$color: (
+	primary: #000000,
+	secondary: #333333
+);

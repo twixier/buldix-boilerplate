@@ -1,24 +1,12 @@
 /*------------------------------------*\
-  #Vendor
+  # Vendor
 \*------------------------------------*/
-
-/**
-* Import thirdparty/vendor specific styles here. (ex: normalize)
-**/
 
 @import "vendor/normalize";
 
-
-
-
-
 /*------------------------------------*\
-  #Utilities
+  # Utilities
 \*------------------------------------*/
-
-/**
-* Configuration and helpers
-**/
 
 @import "utilities/settings",
         "utilities/functions",
@@ -26,76 +14,34 @@
         "utilities/mixins",
         "utilities/placeholders";
 
-
-
-
-
 /*------------------------------------*\
-  #Base
+  # Base
 \*------------------------------------*/
 
 /**
 * Base stuff
 **/
 
-@import "base/body",
+@import	"base/global",
+				"base/body",
         "base/typography";
 
-
-
-
-
 /*------------------------------------*\
-  #Layout
+  # Layout
 \*------------------------------------*/
-
-/**
-* Layout-related sections
-**/
 
 @import "layout/header",
         "layout/footer";
 
-
-
-
-
 /*------------------------------------*\
-  #Components
+  # Components
 \*------------------------------------*/
 
-/**
-* The site building blocks.
-**/
-
-@import "components/link",
-        "components/buttons",
-        "components/headings",
-        "components/paragraph";
-
-
-
-
+@import "component/link",
+        "component/buttons",
+        "component/paragraph";
 
 /*------------------------------------*\
   #Pages
 \*------------------------------------*/
 
-/**
-* Page-specific styles
-**/
-
-@import "";
-
-
-
-
-/*------------------------------------*\
-  #Shame
-\*------------------------------------*/
-
-/**
-* This file contains all hacks, fixes and generel workarounds
-**/
-
-@import "utilities/shame";

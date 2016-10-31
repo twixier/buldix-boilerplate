@@ -1,0 +1,44 @@
+/**
+* Global 
+* Global reset of our default scaffold settings 
+**/
+
+html {
+	font-size: $global-font-size;
+	box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+	box-sizing: inherit;
+}
+
+// Typography resets
+div, dl, dt, dd, ul, ol, li,
+h1, h2, h3, h4, h5, h6, pre,
+form, p, blockquote, th, td {
+	margin: 0;
+	padding: 0;
+}
+
+b, strong {
+	font-weight: map-get($font-weight, bold);
+	line-height: inherit;
+}
+
+em, i {
+	line-height: inherit;
+	font-style: italic;
+}
+
+// link resets
+a {
+	text-decoration: none;
+	cursor: pointer;
+	font-size: $global-font-size;
+	line-height: inherit;	
+	&:hover, &:focus {
+		color: inherit;
+	}
+}

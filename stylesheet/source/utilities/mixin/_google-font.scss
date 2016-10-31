@@ -1,0 +1,10 @@
+/*------------------------------------*\
+  # Google Fonts
+	Mixin to give an easy way to integrate
+	one or multiple google fonts into
+  your project
+	@example: @include google-font($fonts);
+\*------------------------------------*/
+@mixin google-font($fonts: $global-google-fonts) {
+	
+}

@@ -7,36 +7,22 @@
  * to ease things up a bit.
  */
 
-
-
-
-
 /*------------------------------------*\
-  #Text-truncate
+  # Text-truncate
+	Requires inline-block or block for proper styling
+  @compatibility: untested
 \*------------------------------------*/
-
- /**
- * Requires inline-block or block for proper styling
- * Compatibility untested.
- */
-
 @mixin text-truncate() {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
-
-
-
 /*------------------------------------*\
-  #Clearfix
+  # Clearfix
+	Clear floating elements within a container to prevent odd rendering
+	@compability: untested
 \*------------------------------------*/
-
-/**
- * Clear floating elements within a container to prevent odd rendering
- * Compatibility untested.
- */
 
 @mixin clearfix() {
   &::after {
@@ -45,9 +31,6 @@
     clear: both;
   }
 }
-
-
-
 
 /*------------------------------------*\
   #CSS-triangle
@@ -84,9 +67,6 @@
     border-right-style: solid;
   }
 }
-
-
-
 
 /*------------------------------------*\
   #Hamburger-menu

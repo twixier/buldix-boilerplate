@@ -1,0 +1,13 @@
+/*------------------------------------*\
+  # Paragraphs
+\*------------------------------------*/
+$paragraph-line-height: 1.6 !default;
+$paragraph-text-rendering: optimizeLegibility !default;
+$paragraph-margin: 0 0 1rem !default;
+
+p {
+	font-size: inherit;
+	line-height: $paragraph-line-height;
+	text-rendering: $paragraph-text-rendering;
+	margin: $paragraph-margin; 
+}
