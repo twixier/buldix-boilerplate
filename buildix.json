@@ -1,0 +1,70 @@
+{
+  "environment": {
+    "name": "vptdk",
+    "project": "scaffold",
+    "path": "./themes/buildix",
+    "system": {
+      "type": "drupal",
+      "version": 8
+    },
+    "git": true
+  },
+  "module": {
+    "autoprefixer": {},
+    "cssnano": {
+      "options": {
+         "discardComments": {
+          "removeAll": true
+        },
+        "sourcemap": false
+      }
+    },
+    "browsersync": {},
+    "jshint": {},
+    "eslint": {},
+    "sourecmaps": {},
+		"sass": {
+			"options": {}
+		},	
+		"csssplit": {
+			"enabled": false
+		},
+		"browsersync": {
+			"options": {}
+		}
+  },
+  "path": {
+    "templates": {
+      "watch": [
+        "./themes/buildix/static/images/*.{png,jpg,gif}"
+      ]
+    },
+    "images": {
+      "watch": [
+        "./themes/buildix/static/images/*.{png,jpg,gif}"
+      ],
+      "source": []
+    },
+    "sass": {
+      "watch": [
+        "./stylesheet/source/*.scss",
+        "./stylesheet/source/**/*.scss"
+      ],
+      "source": [
+        "./stylesheet/source/main.scss"
+      ],
+			"target": "./stylesheet" 
+    },
+    "script": {
+      "watch": [
+        "./javascript/source/app.js",
+        "./javascript/source/**/*.js"
+      ],
+      "source": [
+        "./javascript/source/app.js"
+      ],
+			"target": "./javascript/"
+    }
+  },
+  "prerequisites": {}
+}

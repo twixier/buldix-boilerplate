@@ -54,10 +54,11 @@ gulp.task('compile:script', () => {
  // Compile develoment javascript
   var devel = browserify({
     entries: objPath.script.source,
-    debug: true
+    debug: true,
+		transform: [babelify, globify]
   });
 
-  return devel.transform(babelify)
+  return devel
 			 .bundle()
        .pipe(source('bundle.dev.js'))
        .pipe(buffer())
@@ -71,10 +72,8 @@ gulp.task('compile:script', () => {
             "message": "Completed: javascript compiling (dev)"
           })
        );
-});
-
-gulp.task('compile:script:prod', () => {
-  // Compile production javascript
+  
+   // Compile production javascript
   var prod = browserify({
     entries: objPath.script.source,
     debug: false
@@ -94,6 +93,17 @@ gulp.task('compile:script:prod', () => {
           })
        )
 });
+
+gulp.task('compile:script2', () => {
+	return gulp.src(['./javascript/source/app.js', './javascript/source/component/*.js'])
+				 .pipe($.babel({
+					presets: ['es2015'],
+					modules: "common"
+				 }))
+				 .pipe($.concat('bundle.js'))
+				 .pipe(gulp.dest('./javascript'))
+
+}); 
 
 /**
 * Images
@@ -122,16 +132,17 @@ gulp.task('default', gulp.series('browsersync:start', (done) => {
       arrTasks = gulp.tree().nodes,
       arrPrivateTasks = ['default', 'browsersync:start'];
   
-  if(!Object.keys(objTasklist).length) return false;
+	if(!Object.keys(objTasklist).length) return false;
   
   for(var task in objTasklist) {
     var currentTask = objTasklist[task];
     if(arrTasks.indexOf(currentTask) > -1) {
       var key = currentTask.replace('compile:','');
       
-      // Create watcher and bind required events
+			// Create watcher and bind required events
       gulp.watch(objPath[key]['watch'], gulp.series(currentTask, reload))
       .on('change', (path) => {
+        console.log("File changed", path);
       })
     }
   }
