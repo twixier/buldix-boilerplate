@@ -55,7 +55,7 @@ gulp.task('compile:script', () => {
   var devel = browserify({
     entries: objPath.script.source,
     debug: true,
-		transform: [babelify, globify]
+		transform: [babelify]
   });
 
   return devel
@@ -94,17 +94,6 @@ gulp.task('compile:script', () => {
        )
 });
 
-gulp.task('compile:script2', () => {
-	return gulp.src(['./javascript/source/app.js', './javascript/source/component/*.js'])
-				 .pipe($.babel({
-					presets: ['es2015'],
-					modules: "common"
-				 }))
-				 .pipe($.concat('bundle.js'))
-				 .pipe(gulp.dest('./javascript'))
-
-}); 
-
 /**
 * Images
 * Opitimize images found in our local image (library) store
@@ -138,12 +127,17 @@ gulp.task('default', gulp.series('browsersync:start', (done) => {
     var currentTask = objTasklist[task];
     if(arrTasks.indexOf(currentTask) > -1) {
       var key = currentTask.replace('compile:','');
-      
-			// Create watcher and bind required events
-      gulp.watch(objPath[key]['watch'], gulp.series(currentTask, reload))
-      .on('change', (path) => {
-        console.log("File changed", path);
-      })
+     	
+			// Watcher one required to intiate 
+      var watcher = gulp.watch(objPath[key]['watch'], gulp.series(currentTask, reload));
+	      
+			watcher
+			.on('add', path => { // Add a file to our watcher
+				watcher.add(path);
+			}) 
+			.on('unlink', path => { // Unlink a file from our watcher
+				watcher.unwatch(path);			
+			});
     }
   }
   
