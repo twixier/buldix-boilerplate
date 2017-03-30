@@ -1,0 +1,161 @@
+/*------------------------------------*\
+  # login-panel
+  Custom panel for displaying login options
+@todo: Restructure this to a more clean approach
+\*------------------------------------*/
+
+input[type="text"], input[type="password"], input[type="email"], input[type="tel"] {
+  display: block;
+  width: 100%;
+  padding: 0.4375rem 0;
+  font-size: 1rem;
+  line-height: 1.25;
+  color: rgba(0, 0, 0, 0.54);
+  background-color: transparent;
+  background-image: none;
+  background-clip: padding-box;
+  border: 1px solid rgba(0, 0, 0, 0.26);
+  border-radius: 0;
+  box-shadow: none;
+  outline: 0;
+  
+  
+  // Animations
+  background: no-repeat center bottom, center calc(100% - 1px);
+  background-size: 0 100%, 100% 100%;
+  border: 0;
+  -webkit-transition: background 0s ease-out;
+  transition: background 0s ease-out;
+
+  background-image: linear-gradient(to top, #0d47a1 2px, rgba(13, 71, 161, 0) 2px), linear-gradient(to top, rgba(0, 0, 0, 0.26) 1px, transparent 1px);
+}
+
+// Checkbox 
+.checkbox {
+
+}
+
+  .checkbox label {
+    font-size: 1rem;
+    line-height: 1.5;
+    padding-left: 1.5625rem;
+    cursor: pointer;
+  }
+
+  .checkbox input[type="checkbox"] {
+    position: absolute;
+    left: 0;
+    z-index: -1;
+    width: 0;
+    height: 0;
+    margin: 0;
+    overflow: hidden;
+    pointer-events: none;
+    opacity: 0;
+  }
+
+  .checkbox__decorator {
+    position: absolute;
+    top: 0.125rem;
+    left: 0;
+    vertical-align: middle;
+  }
+    .checkbox input[type="checkbox"]:checked .checkbox__decorator::before {
+      
+    }
+
+    .checkbox__decorator::before {
+      position: absolute;
+      display: block;
+      width: 0;
+      height: 0;
+      margin-top: -4px;
+      margin-left: 6px;
+      content: "";
+      box-shadow: 0 0 0 0, 0 0 0 0, 0 0 0 0, 0 0 0 0, 0 0 0 0, 0 0 0 0, 0 0 0 0 inset;
+      transform: rotate(45deg);
+      animation: checkbox-off;
+    }
+
+  .checkbox__decorator > .mark {
+    position: relative;
+    z-index: 1;
+    display: inline-block;
+    width: 1.25rem;
+    height: 1.25rem;
+    overflow: hidden;
+    border: 0.125rem solid rgba(0, 0, 0, 0.54);
+    border-radius: 0.125rem;
+  }
+
+// Quicky: Button
+input[type="submit"] {
+  width: 100%;
+  display: block;
+  
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+  position: relative;
+  padding: 14px 0;
+  color: #ffffff;
+    margin-bottom: 0.3125rem;
+    font-size: 0.875rem;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 0;
+    cursor: pointer;
+    background-color: transparent;
+    border: 0;
+    outline: 0;
+    transition: box-shadow 0.2s cubic-bezier(0.4, 0, 1, 1), background-color 0.2s cubic-bezier(0.4, 0, 0.2, 1), color 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: box-shadow, transform;
+    background-color: #205081;
+}
+
+
+
+// input-group
+// label + input
+
+.input-group {
+  position: relative;
+  margin: 0;
+  padding: 1.2rem 0 0; 
+  
+  input[type="text"], input[type="password"], input[type="email"] {
+    font-size: 1.2rem;
+  }
+  
+  select {
+    background: transparent;
+    appearance: none; 
+    width: 100%; 
+    font-size: 1.2rem; 
+    padding: .4375rem 0; 
+    line-height: 1.25; 
+    color: rgba(0,0,0,.54); 
+    border-bottom: 1px solid rgba(0,0,0,.26); 
+    border-left: none; 
+    border-right: none; 
+    border-top: none;
+    border-radius: 0;
+    outline: 0;
+  }
+    
+  input[type="text"].active, input[type="password"].active, input[type="email"].active {
+
+  }
+  
+  label {
+    font-size: 1.2rem;
+    color: rgba(0, 0, 0, 0.50);
+    position: absolute;
+    pointer-events: none;
+    transition: 0.3s ease all;
+    top: 1.6rem;
+  }
+  
+  &.active label {
+    font-size: 0.9rem;
+    top: 0.6rem;
+  }
+}

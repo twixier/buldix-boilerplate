@@ -1,0 +1,41 @@
+table {
+  width: 100%;
+  max-width: 100%;
+  border-spacing: 0;
+  border-collapse: collapse;
+}   
+  
+  table thead th {
+    padding: 8px;
+    text-align: left;
+    vertical-align: bottom;
+    border-bottom: #e9e9e9 1px solid;
+  }
+    
+    // Panel only? 
+    table thead th:first-child {
+      padding: 8px 10px 8px 20px;
+    }
+
+    table thead th:last-child {
+      padding: 8px 20px 8px 10px;
+    }
+
+  table tbody td {
+    padding: 8px;
+    text-align: left;
+    vertical-align: baseline;
+  }
+
+    // Panel only? 
+    table tbody td:first-child {
+      padding: 8px 10px 8px 20px;
+    } 
+
+    table tbody td:last-child {
+      padding: 8px 20px 8px 10px;
+    } 
+  
+  table tbody tr:last-child td, table tbody tr:only-child td {
+    border-bottom: none;
+  }

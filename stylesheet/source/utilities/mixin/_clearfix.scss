@@ -1,0 +1,15 @@
+/*------------------------------------*\
+  # Clearfix
+  Clearfix mixin
+  @
+\*------------------------------------*/  
+@mixin clearfix () {
+  &:before,
+  &:after {
+      content: "";
+      display: table;
+  }
+  &:after {
+      clear: both;
+  }
+}

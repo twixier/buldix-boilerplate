@@ -1,0 +1,12 @@
+/*------------------------------------*\
+  #Body
+\*------------------------------------*/
+body {
+  font-family: $font-primary;
+  @if $font-antialiased {
+    text-rendering: optimizeLegibility;
+  }
+  font-weight: 300;
+  font-size: map-get($font-size, 'md');
+  height: 100%;
+}
